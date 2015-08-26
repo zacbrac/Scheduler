@@ -30,6 +30,12 @@ class Schedule
 
     }
 
+    public function getStartDate() {
+
+        return $this->startDate;
+
+    }
+
     public function getTotalWeeks() {
 
         return $this->totalWeeks;
@@ -106,7 +112,7 @@ class Schedule
 
     }
 
-    public function getDesignStartDate() {
+    public function getDesignStartNumber() {
 
         return floor($this->getBusinessDays() * $this->getResearchPercentage() / 2) - 1;
 
@@ -114,25 +120,51 @@ class Schedule
 
     public function getDesignEndNumber() {
 
-        return floor($this->getBusinessDays() * $this->getDesignPercentage()) + $this->getDesignStartNum();
+        return floor($this->getBusinessDays() * $this->getDesignPercentage()) + $this->getDesignStartNumber();
+
+    }
+
+    public function getDevelopmentStartNumber() {
+
+        return $this->getDesignEndNumber();
 
     }
 
     public function getDevelopmentEndNumber() {
 
-        return floor($this->getBusinessDays() * $this->getDevelopmentPercentage()) + $this->getDesignEndNumber();
+        return floor($this->getBusinessDays() * $this->getDevelopmentPercentage()) + $this->getDevelopmentStartNumber();
+
+    }
+
+    public function getTrainingStartNumber() {
+
+        return $this->getDevelopmentEndNumber();
 
     }
 
     public function getTrainingEndNumber() {
 
-        return floor($this->getBusinessDays() * ($this->getResearchPercentage() / 2)) + $this->getDevelopmentEndNumber();
+        return floor($this->getBusinessDays() * ($this->getResearchPercentage() / 2)) + $this->getTrainingStartNumber();
+
+    }
+
+    public function getQAStartNumber() {
+
+        return $this->getTrainingEndNumber();
 
     }
 
     public function getQAEndNumber() {
 
-        return floor($this->getBusinessDays() * $this->getResearchPercentage()) + $this->getTrainingEndNumber();
+        return floor($this->getBusinessDays() * $this->getResearchPercentage()) + $this->getQAStartNumber();
+
+    }
+
+    public function getDesignStartDate() {
+
+        $projectDays = $this->getProjectDays();
+
+        return $projectDays[$this->getDesignStartNumber()];
 
     }
 
@@ -141,6 +173,14 @@ class Schedule
         $projectDays = $this->getProjectDays();
 
         return $projectDays[$this->getDesignEndNumber()];
+
+    }
+
+    public function getDevelopmentStartDate() {
+
+        $projectDays = $this->getProjectDays();
+
+        return $projectDays[$this->getDevelopmentStartNumber()];
 
     }
 
@@ -160,11 +200,20 @@ class Schedule
 
     }
 
+    public function getQAStartDate() {
+
+        $projectDays = $this->getProjectDays();
+
+        return $projectDays[$this->getQAStartNumber()];
+        
+    }
+
     public function getQAEndDate() {
 
         $projectDays = $this->getProjectDays();
 
         return $projectDays[$this->getQAEndNumber()];
+
     }
     
     public function setDateRange($dateRange) {
@@ -176,6 +225,42 @@ class Schedule
     public function setHolidays($holidays) {
 
         $this->holidays = $holidays;
+
+    }
+
+    public function setDeveloper($developer) {
+
+        $this->developer = $developer;
+
+    }
+
+    public function setDesigner($designer) {
+
+        $this->designer = $designer;
+
+    }
+
+    public function setProjectManager($projectManager) {
+
+        $this->projectManager = $projectManager;
+
+    }
+
+    public function getDeveloper() {
+
+        return $this->developer;
+
+    }
+
+    public function getDesigner() {
+
+        return $this->designer;
+
+    }
+
+    public function getProjectManager() {
+
+        return $this->projectManager;
 
     }
 
