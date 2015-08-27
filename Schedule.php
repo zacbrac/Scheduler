@@ -215,16 +215,40 @@ class Schedule
         return $projectDays[$this->getQAEndNumber()];
 
     }
-    
-    public function setDateRange($dateRange) {
 
-        $this->dateRange = $dateRange;
+    public function getDeveloper() {
+
+        return $this->developer;
 
     }
 
-    public function setHolidays($holidays) {
+    public function getDesigner() {
 
-        $this->holidays = $holidays;
+        return $this->designer;
+
+    }
+
+    public function getProjectManager() {
+
+        return $this->projectManager;
+
+    }
+
+    public function setStartDate($startDate) {
+
+        $this->startDate = $startDate;
+
+    }
+
+    public function setTotalWeeks($totalWeeks) {
+
+        $this->totalWeeks = $totalWeeks;
+
+    }
+
+    public function setTotalHours($totalHours) {
+
+        $this->totalHours = $totalHours;
 
     }
 
@@ -246,21 +270,15 @@ class Schedule
 
     }
 
-    public function getDeveloper() {
+    public function setDateRange($dateRange) {
 
-        return $this->developer;
-
-    }
-
-    public function getDesigner() {
-
-        return $this->designer;
+        $this->dateRange = $dateRange;
 
     }
 
-    public function getProjectManager() {
+    public function setHolidays($holidays) {
 
-        return $this->projectManager;
+        $this->holidays = $holidays;
 
     }
 
