@@ -119,7 +119,7 @@ $Schedule->setProjectManager('Mark');
         </tr>
     </table>
 
-    <form action="save_to_csv.php">
+    <form action="save_to_csv.php" method="post">
         <input type="hidden" name="start" value="<?php echo $_POST['start']; ?>">
         <input type="hidden" name="totalWeeks" value="<?php echo $_POST['totalWeeks']; ?>">
         <input type="hidden" name="totalHours" value="<?php echo $_POST['totalHours']; ?>">
