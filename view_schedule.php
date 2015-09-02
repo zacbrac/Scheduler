@@ -24,6 +24,19 @@ $daterange = new DatePeriod($begin, $interval ,$Schedule->getEndDate());
 $Schedule->setDateRange($daterange);
 $Schedule->setHolidays(file('holidays.csv'));
 
+if ( !empty($_POST['design']) ) {
+    $Schedule->setDesignPercent($_POST['design']);
+}
+if ( !empty($_POST['development']) ) {
+   $Schedule->setDevelopmentPercent($_POST['development']);
+}
+if ( !empty($_POST['research']) ) {
+    $Schedule->setResearchPercent($_POST['research']);
+}
+if ( !empty($_POST['qa']) ) {
+    $Schedule->setQAPercent($_POST['qa']);
+}
+
 $Schedule->setDeveloper('Zac');
 $Schedule->setDesigner('Micheal');
 $Schedule->setProjectManager('Mark');
