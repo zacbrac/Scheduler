@@ -252,25 +252,25 @@ class Schedule
 
     }
 
-    public function setDesignPercent($designPercentage) {
+    public function setDesignPercentage($designPercentage) {
 
         $this->designPercentage = $designPercentage;
 
     }
 
-    public function setDevelopmentPercent($developmentPercentage) {
+    public function setDevelopmentPercentage($developmentPercentage) {
 
         $this->developmentPercentage = $developmentPercentage;
 
     }
 
-    public function setResearchPercent($researchPercentage) {
+    public function setResearchPercentage($researchPercentage) {
 
         $this->researchPercentage = $researchPercentage;
 
     }
 
-    public function setQAPercent($qaPercentage) {
+    public function setQAPercentage($qaPercentage) {
 
         $this->qaPercentage = $qaPercentage;
 
