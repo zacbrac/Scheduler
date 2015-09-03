@@ -17,7 +17,7 @@ Scheduler takes three main inputs and generates a project schedule based off of 
 
 *Future additions:*
 
-1. Export to csv 
+~~1. Export to csv~~
 2. Schedules saved to database
 3. Input for responsible parties *(assigned dev, designer, pm)*
 4. ical feed generation
