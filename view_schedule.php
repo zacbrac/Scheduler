@@ -25,16 +25,27 @@ $Schedule->setDateRange($daterange);
 $Schedule->setHolidays(file('holidays.csv'));
 
 if ( !empty($_POST['design']) ) {
-    $Schedule->setDesignPercentage($_POST['design']);
+    
+    $Schedule->setDesignPercentage('.' . $_POST['design']);
+
 }
+
 if ( !empty($_POST['development']) ) {
-   $Schedule->setDevelopmentPercentage($_POST['development']);
+
+   $Schedule->setDevelopmentPercentage('.' . $_POST['development']);
+
 }
+
 if ( !empty($_POST['research']) ) {
-    $Schedule->setResearchPercentage($_POST['research']);
+
+    $Schedule->setResearchPercentage('.' . $_POST['research']);
+
 }
+
 if ( !empty($_POST['qa']) ) {
-    $Schedule->setQAPercentage($_POST['qa']);
+
+    $Schedule->setQAPercentage('.' . $_POST['qa']);
+
 }
 
 $Schedule->setDeveloper('Zac');
