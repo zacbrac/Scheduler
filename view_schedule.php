@@ -87,7 +87,7 @@ $Schedule->setProjectManager('Mark');
         </tr>
         <tr>
             <td><b>Design Begins</b></td>
-            <td><?php echo $Schedule->getTotalHours() * $Schedule->getDesignPercentage(); ?></td>
+            <td><?php echo $Schedule->getBusinessDays() * $Schedule->getDesignPercentage(); ?></td>
             <td><?php echo $Schedule->getDesignStartDate(); ?></td>
             <td></td>
             <td></td>
@@ -103,7 +103,7 @@ $Schedule->setProjectManager('Mark');
         </tr>
         <tr>
             <td><b>Development Begins</b></td>
-            <td><?php echo $Schedule->getTotalHours() * $Schedule->getDevelopmentPercentage(); ?></td>
+            <td><?php echo $Schedule->getBusinessDays() * $Schedule->getDevelopmentPercentage(); ?></td>
             <td><?php echo $Schedule->getDevelopmentStartDate(); ?></td>
             <td></td>
             <td></td>
