@@ -64,6 +64,23 @@
                     <input type="number" name="qa" placeholder="15" class="form-control">
                 </div>
 
+                <p class="help-block">Team Members assigned</p>
+
+                <div class="form-group">
+                    <label for="designer">Designer: </label>
+                    <input type="text" name="designer" placeholder="15" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="developer">Developer: </label>
+                    <input type="text" name="developer" placeholder="15" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="pm">Project Manager: </label>
+                    <input type="text" name="pm" placeholder="15" class="form-control">
+                </div>
+
                 <button type="submit" class="btn btn-default">Generate Schedule</button>
 
             </form>
