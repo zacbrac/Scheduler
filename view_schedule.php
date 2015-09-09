@@ -113,7 +113,14 @@
           </div>  
         </div>
       </div>    
-    </div>    
+    </div>  
+    
+    <form action="save_to_csv.php" method="post">
+        <input type="hidden" name="start" value="<?php echo $_POST['start']; ?>">
+        <input type="hidden" name="totalWeeks" value="<?php echo $_POST['totalWeeks']; ?>">
+        <input type="hidden" name="totalHours" value="<?php echo $_POST['totalHours']; ?>">
+        <button type="submit" class="btn btn-default">Export to CSV</button>
+    </form>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
