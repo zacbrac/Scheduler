@@ -68,17 +68,17 @@
 
                 <div class="form-group">
                     <label for="designer">Designer: </label>
-                    <input type="text" name="designer" placeholder="15" class="form-control">
+                    <input type="text" name="designer" placeholder="Designer" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="developer">Developer: </label>
-                    <input type="text" name="developer" placeholder="15" class="form-control">
+                    <input type="text" name="developer" placeholder="Developer" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="pm">Project Manager: </label>
-                    <input type="text" name="pm" placeholder="15" class="form-control">
+                    <input type="text" name="pm" placeholder="Project Manager" class="form-control">
                 </div>
 
                 <button type="submit" class="btn btn-default">Generate Schedule</button>
