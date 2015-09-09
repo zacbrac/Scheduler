@@ -25,32 +25,27 @@ $Schedule->setDateRange($daterange);
 $Schedule->setHolidays(file('holidays.csv'));
 
 if ( !empty($_POST['design']) ) {
-    
-    $Schedule->setDesignPercentage('.' . $_POST['design']);
-
+    $Schedule->setDesignPercent('.'.$_POST['design']);
 }
-
 if ( !empty($_POST['development']) ) {
-
-   $Schedule->setDevelopmentPercentage('.' . $_POST['development']);
-
+   $Schedule->setDevelopmentPercent('.'.$_POST['development']);
 }
-
 if ( !empty($_POST['research']) ) {
-
-    $Schedule->setResearchPercentage('.' . $_POST['research']);
-
+    $Schedule->setResearchPercent('.'.$_POST['research']);
 }
-
 if ( !empty($_POST['qa']) ) {
-
-    $Schedule->setQAPercentage('.' . $_POST['qa']);
-
+    $Schedule->setQAPercent('.'.$_POST['qa']);
+}
+if ( !empty($_POST['designer']) ) {
+    $Schedule->setDesigner($_POST['designer']);
+}
+if ( !empty($_POST['developer']) ) {
+    $Schedule->setDeveloper($_POST['developer']);
+}
+if ( !empty($_POST['pm']) ) {
+    $Schedule->setProjectManager($_POST['pm']);
 }
 
-$Schedule->setDeveloper('Zac');
-$Schedule->setDesigner('Micheal');
-$Schedule->setProjectManager('Mark');
 
 ?>
 <!DOCTYPE html>
