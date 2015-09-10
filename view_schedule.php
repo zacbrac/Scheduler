@@ -10,41 +10,8 @@ if( empty($_POST['start']) && empty($_POST['totalWeeks']) && empty($_POST['total
 // Just in case you run this off of a server that has a jacked up timezone. 
 date_default_timezone_set('America/Los_Angeles');
 
-include 'Schedule.php';
-
-$interval = new DateInterval('P1D');
-
-$begin = new DateTime($_POST['start']);
-$end = new DateTime($_POST['start']);
-
-$Schedule = new Schedule($begin,$_POST['totalWeeks'],$_POST['totalHours']);
-
-$daterange = new DatePeriod($begin, $interval ,$Schedule->getEndDate());
-
-$Schedule->setDateRange($daterange);
-$Schedule->setHolidays(file('holidays.csv'));
-
-if ( !empty($_POST['design']) ) {
-    $Schedule->setDesignPercent('.'.$_POST['design']);
-}
-if ( !empty($_POST['development']) ) {
-   $Schedule->setDevelopmentPercent('.'.$_POST['development']);
-}
-if ( !empty($_POST['research']) ) {
-    $Schedule->setResearchPercent('.'.$_POST['research']);
-}
-if ( !empty($_POST['qa']) ) {
-    $Schedule->setQAPercent('.'.$_POST['qa']);
-}
-if ( !empty($_POST['designer']) ) {
-    $Schedule->setDesigner($_POST['designer']);
-}
-if ( !empty($_POST['developer']) ) {
-    $Schedule->setDeveloper($_POST['developer']);
-}
-if ( !empty($_POST['pm']) ) {
-    $Schedule->setProjectManager($_POST['pm']);
-}
+require 'Schedule.php';
+include 'Build.php';
 
 
 ?>
@@ -160,6 +127,13 @@ if ( !empty($_POST['pm']) ) {
                 <input type="hidden" name="start" value="<?php echo $_POST['start']; ?>">
                 <input type="hidden" name="totalWeeks" value="<?php echo $_POST['totalWeeks']; ?>">
                 <input type="hidden" name="totalHours" value="<?php echo $_POST['totalHours']; ?>">
+                <input type="hidden" name="design" value="<?php echo $_POST['design']; ?>">
+                <input type="hidden" name="development" value="<?php echo $_POST['development']; ?>">
+                <input type="hidden" name="research" value="<?php echo $_POST['research']; ?>">
+                <input type="hidden" name="qa" value="<?php echo $_POST['qa']; ?>">
+                <input type="hidden" name="designer" value="<?php echo $_POST['designer']; ?>">
+                <input type="hidden" name="developer" value="<?php echo $_POST['developer']; ?>">
+                <input type="hidden" name="pm" value="<?php echo $_POST['pm']; ?>">
                 <button type="submit">Export to CSV</button>
             </form>
 
