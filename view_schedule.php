@@ -7,16 +7,9 @@ if( empty($_POST['start']) && empty($_POST['totalWeeks']) && empty($_POST['total
 
 }
 
-// Just in case you run this off of a server that has a jacked up timezone. 
-date_default_timezone_set('America/Los_Angeles');
-
-require 'Schedule.php';
-include 'Build.php';
-
-
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="scheduleApp">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,8 +26,38 @@ include 'Build.php';
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="angular.min.js"></script>
+
+    <script>
+      var scheduleApp = angular.module('scheduleApp', []);
+
+      scheduleApp.controller('ScheduleCtrl', function ($scope, $http){
+
+        // Temporary. Will set scope variables in another view
+        var start = "<?php echo $_POST['start']; ?>";
+        var totalHours = "<?php echo $_POST['totalHours']; ?>";
+        var totalWeeks = "<?php echo $_POST['totalWeeks']; ?>";
+        var design = "<?php echo $_POST['design']; ?>";
+        var development = "<?php echo $_POST['development']; ?>";
+        var research = "<?php echo $_POST['research']; ?>";
+        var qa = "<?php echo $_POST['qa']; ?>";
+        var designer = "<?php echo $_POST['designer']; ?>";
+        var developer = "<?php echo $_POST['developer']; ?>";
+        var pm = "<?php echo $_POST['pm']; ?>";
+
+        $http.get('http://markpatterson.rocks/ang-scheduler/scheduleJSON.php?start=' + start + '&totalWeeks=' + totalWeeks + '&totalHours=' + totalHours + '&design=' + design +'&development=' + development +'&research=' + research +'&qa=' + qa +'&designer=' + designer +'&developer=' + developer +'&pm=' + pm).
+        then(function(response) {
+            $scope.table = response.data;
+        }, function(response) {
+            alert("something went wrong");
+        });        
+                
+      });
+
+    </script>
+
   </head>
-<body>
+<body ng-controller="ScheduleCtrl">
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
@@ -42,84 +65,20 @@ include 'Build.php';
           <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    <td></td>
+                    <td>Tasks</td>
                     <td>Duration</td>
                     <td>Dates</td>
                     <td>Completed</td>
                     <td>Delay</td>
                     <td>Department</td> 
                 </tr>
-                <tr>
-                    <td><b>Contract Signed</b></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getStartDate()->format('m/d/Y'); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getProjectManager(); ?></td>
-                </tr>
-                <tr>
-                    <td>Input into Trello</td>
-                    <td></td>
-                    <td><?php echo $Schedule->getStartDate()->format('m/d/Y'); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getProjectManager(); ?></td>
-                </tr>
-                <tr>
-                    <td><b>Design Begins</b></td>
-                    <td><?php echo $Schedule->getBusinessDays() * $Schedule->getDesignPercentage(); ?></td>
-                    <td><?php echo $Schedule->getDesignStartDate(); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getDesigner(); ?></td>
-                </tr>
-                <tr>
-                    <td><b>Design Complete</b></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getDesignEndDate(); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getDesigner(); ?></td>
-                </tr>
-                <tr>
-                    <td><b>Development Begins</b></td>
-                    <td><?php echo $Schedule->getBusinessDays() * $Schedule->getDevelopmentPercentage(); ?></td>
-                    <td><?php echo $Schedule->getDevelopmentStartDate(); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getDeveloper(); ?></td>
-                </tr>
-                <tr>
-                    <td><b>Development Complete</b></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getDevelopmentEndDate(); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td><?php echo $Schedule->getDeveloper(); ?></td>
-                </tr>
-                <tr>
-                    <td>QA Begins</td>
-                    <td></td>
-                    <td><?php echo $Schedule->getQAStartDate(); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>QA Complete</td>
-                    <td></td>
-                    <td><?php echo $Schedule->getQAEndDate(); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Estimated launch date (<?php echo $Schedule->getTotalWeeks(); ?> wks)</td>
-                    <td></td>
-                    <td><?php echo $Schedule->getEndDate()->format('m/d/Y'); ?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                <tr ng-repeat="cell in table">
+                    <td>{{cell.Task}}</td>
+                    <td>{{cell.Duration}}</td>
+                    <td>{{cell.Dates}}</td>
+                    <td>{{cell.Completed}}</td>
+                    <td>{{cell.Delay}}</td>
+                    <td>{{cell.Department}}</td>
                 </tr>
             </table>
 
@@ -134,7 +93,7 @@ include 'Build.php';
                 <input type="hidden" name="designer" value="<?php echo $_POST['designer']; ?>">
                 <input type="hidden" name="developer" value="<?php echo $_POST['developer']; ?>">
                 <input type="hidden" name="pm" value="<?php echo $_POST['pm']; ?>">
-                <button type="submit">Export to CSV</button>
+                <button type="submit" class="btn btn-primary">Export to CSV</button>
             </form>
 
             </div>  
