@@ -23,3 +23,4 @@ Scheduler takes three main inputs and generates a project schedule based off of 
 4. ical feed generation
 5. Add/remove rows
 6. Recall old schedules
+7. Dynamic percentage inputs with front end validation and dynamic summation
